@@ -3,20 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/searchListFragment">
+    app:startDestination="@id/searchFragment">
 
     <fragment
-        android:id="@+id/searchListFragment"
-        android:name="com.example.starwarstest.ui.searchscreen.SearchListFragment"
-        android:label="fragment_search_list"
-        tools:layout="@layout/fragment_search_list" >
-        <action
-            android:id="@+id/action_searchListFragment_to_favouritesListFragment"
-            app:destination="@id/favouritesListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/favouritesListFragment"
-        android:name="com.example.starwarstest.ui.favourites.FavouritesListFragment"
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.starwarstest.ui.screens.favourites.FavouriteFragment"
         android:label="fragment_favourites_list"
         tools:layout="@layout/fragment_favourites_list" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.starwarstest.ui.screens.searchscreens.SearchFragment"
+        android:label="fragment_search_starship"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
+    </fragment>
+
 </navigation>

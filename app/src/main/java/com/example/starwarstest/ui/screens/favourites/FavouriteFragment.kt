@@ -1,4 +1,4 @@
-package com.example.starwarstest.ui.favourites
+package com.example.starwarstest.ui.screens.favourites
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.starwarstest.R
 
-class FavouritesListFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+class FavouriteFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

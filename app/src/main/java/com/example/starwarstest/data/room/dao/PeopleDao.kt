@@ -11,11 +11,11 @@ import com.example.starwarstest.data.room.entities.PeopleEntity
 interface PeopleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPeople(peopleEntity: PeopleEntity)
+    fun insertPeople(peopleEntity: PeopleEntity)
 
     @Query("SELECT * FROM people_entity")
-    suspend fun getPeopleList(): List<PeopleEntity>
+    fun getPeopleList(): List<PeopleEntity>
 
     @Delete
-    suspend fun deletePeople(peopleEntity: PeopleEntity)
+    fun deletePeople(peopleEntity: PeopleEntity)
 }

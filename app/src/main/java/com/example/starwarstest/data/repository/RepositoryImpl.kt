@@ -9,8 +9,9 @@ import com.example.starwarstest.domain.model.People
 import com.example.starwarstest.domain.model.Starship
 import com.example.starwarstest.domain.repositories.RetrofitRepository
 import com.example.starwarstest.domain.repositories.RoomRepository
+import javax.inject.Inject
 
-class RepositoryImpl(
+class RepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val peopleDao: PeopleDao,
     private val starshipDao: StarshipDao,
@@ -37,29 +38,29 @@ class RepositoryImpl(
                 )
             }
 
-    override suspend fun doPeopleFavourite(people: People) {
+    override fun doPeopleFavourite(people: People) {
         val peopleEntity = PeopleEntity.convertFromPeople(people)
         peopleDao.insertPeople(peopleEntity)
     }
 
-    override suspend fun doStarshipFavourite(starship: Starship) {
+    override fun doStarshipFavourite(starship: Starship) {
         val starshipEntity = StarshipEntity.convertFromStarship(starship)
         starshipDao.insertStarship(starshipEntity)
     }
 
-    override suspend fun doPeopleNotFavourite(people: People) {
+    override fun doPeopleNotFavourite(people: People) {
         val peopleEntity = PeopleEntity.convertFromPeople(people)
         peopleDao.deletePeople(peopleEntity)
     }
 
-    override suspend fun doStarshipNotFavourite(starship: Starship) {
+    override fun doStarshipNotFavourite(starship: Starship) {
         val starshipEntity = StarshipEntity.convertFromStarship(starship)
         starshipDao.deleteStarship(starshipEntity)
     }
 
-    override suspend fun getStarshipList(): List<Starship> =
+    override fun getStarshipList(): List<Starship> =
         starshipDao.getStarshipList().map { starshipEntity -> starshipEntity.convertToStarship() }
 
-    override suspend fun getPeopleList(): List<People> =
+    override fun getPeopleList(): List<People> =
         peopleDao.getPeopleList().map { peopleEntity -> peopleEntity.convertToPeople() }
 }

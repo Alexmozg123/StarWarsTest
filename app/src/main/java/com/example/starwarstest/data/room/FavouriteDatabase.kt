@@ -11,9 +11,7 @@ import com.example.starwarstest.data.room.entities.StarshipEntity
     entities = [PeopleEntity::class, StarshipEntity::class],
     version = 1
 )
-abstract class Database : RoomDatabase() {
-
+abstract class FavouriteDatabase : RoomDatabase() {
     abstract fun getPeopleDao(): PeopleDao
-
     abstract fun getStarshipDao(): StarshipDao
 }
