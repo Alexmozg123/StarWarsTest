@@ -11,11 +11,11 @@ import com.example.starwarstest.data.room.entities.StarshipEntity
 interface StarshipDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertStarship(starshipEntity: StarshipEntity)
+    fun insertStarship(starshipEntity: StarshipEntity)
 
     @Query("SELECT * FROM starship_entity")
-    suspend fun getStarshipList(): List<StarshipEntity>
+    fun getStarshipList(): List<StarshipEntity>
 
     @Delete
-    suspend fun deleteStarship(starshipEntity: StarshipEntity)
+    fun deleteStarship(starshipEntity: StarshipEntity)
 }

@@ -5,15 +5,15 @@ import com.example.starwarstest.domain.model.Starship
 
 interface RoomRepository {
 
-    suspend fun doPeopleFavourite(people: People)
+    fun doPeopleFavourite(people: People)
 
-    suspend fun doStarshipFavourite(starship: Starship)
+    fun doStarshipFavourite(starship: Starship)
 
-    suspend fun doPeopleNotFavourite(people: People)
+    fun doPeopleNotFavourite(people: People)
 
-    suspend fun doStarshipNotFavourite(starship: Starship)
+    fun doStarshipNotFavourite(starship: Starship)
 
-    suspend fun getStarshipList(): List<Starship>
+    fun getStarshipList(): List<Starship>
 
-    suspend fun getPeopleList(): List<People>
+    fun getPeopleList(): List<People>
 }

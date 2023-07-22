@@ -8,4 +8,5 @@ interface RetrofitRepository {
     suspend fun getPeopleListByName(name: String) : List<People>
 
     suspend fun getStarshipListByName(name: String) : List<Starship>
+
 }
