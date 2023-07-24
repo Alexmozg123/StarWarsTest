@@ -1,7 +1,5 @@
 package com.example.starwarstest.domain
 
-import com.example.starwarstest.domain.model.People
-import com.example.starwarstest.domain.model.Starship
 import com.example.starwarstest.domain.model.UIModel
 import com.example.starwarstest.domain.repositories.RetrofitRepository
 import com.example.starwarstest.domain.repositories.RoomRepository
@@ -20,10 +18,10 @@ class StarWarsInteractor @Inject constructor(
         if (name.length >= 2) {
             coroutineScope {
                 launch(Dispatchers.IO) {
-                    resultList.addAll(
-                        listOf(retrofitRepository.getPeopleListByName(name) as UIModel))
-                    resultList.addAll(
-                        listOf(retrofitRepository.getStarshipListByName(name) as UIModel))
+                    resultList.addAll(retrofitRepository.getStarshipListByName(name)
+                        .map { UIModel.StarshipModel(it) })
+                    resultList.addAll(retrofitRepository.getPeopleListByName(name)
+                        .map { UIModel.PeopleModel(it) })
                 }
             }
             return resultList
@@ -31,22 +29,31 @@ class StarWarsInteractor @Inject constructor(
         return emptyList()
     }
 
-    suspend fun doFavourite(entity: Any) {
+    fun doFavourite(entity: UIModel) {
         when (entity) {
-            is People -> roomRepository.doPeopleFavourite(entity)
-            is Starship -> roomRepository.doStarshipFavourite(entity)
+            is UIModel.PeopleModel -> roomRepository.doPeopleFavourite(entity.people)
+            is UIModel.StarshipModel -> roomRepository.doStarshipFavourite(entity.starship)
         }
     }
 
-    suspend fun doNotFavourite(entity: Any) {
+    fun doNotFavourite(entity: UIModel) {
         when (entity) {
-            is People -> roomRepository.doPeopleNotFavourite(entity)
-            is Starship -> roomRepository.doStarshipNotFavourite(entity)
+            is UIModel.PeopleModel -> roomRepository.doPeopleNotFavourite(entity.people)
+            is UIModel.StarshipModel -> roomRepository.doStarshipNotFavourite(entity.starship)
         }
     }
 
-    suspend fun readFavouritePeople(): List<People> = roomRepository.getPeopleList()
-
-    suspend fun readFavouriteStarship(): List<Starship> = roomRepository.getStarshipList()
+    suspend fun readFavourite(): List<UIModel> {
+        val resultList = mutableListOf<UIModel>()
+        coroutineScope {
+            launch(Dispatchers.IO) {
+                resultList.addAll(roomRepository.getPeopleList()
+                    .map { UIModel.PeopleModel(it) })
+                resultList.addAll(roomRepository.getStarshipList()
+                    .map { UIModel.StarshipModel(it) })
+            }
+        }
+        return resultList
+    }
 }
 

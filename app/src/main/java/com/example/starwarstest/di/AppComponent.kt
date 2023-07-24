@@ -1,6 +1,7 @@
 package com.example.starwarstest.di
 
 import android.content.Context
+import com.example.starwarstest.ui.MainApp
 import com.example.starwarstest.ui.screens.favourites.FavouriteFragment
 import com.example.starwarstest.ui.screens.searchscreens.SearchFragment
 import dagger.BindsInstance
@@ -11,6 +12,7 @@ interface AppComponent {
 
     fun inject(searchFragment: SearchFragment): SearchFragment
     fun inject(favouriteFragment: FavouriteFragment): FavouriteFragment
+    fun inject(mainApp: MainApp): MainApp
 
     @Component.Builder
     interface Builder {

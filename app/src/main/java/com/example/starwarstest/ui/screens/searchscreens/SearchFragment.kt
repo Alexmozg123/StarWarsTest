@@ -17,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarstest.R
+import com.example.starwarstest.domain.model.UIModel
 import com.example.starwarstest.ui.MainApp
 import com.example.starwarstest.ui.screens.adapter.StarWarsAdapter
 import javax.inject.Inject
@@ -25,15 +26,18 @@ class SearchFragment : Fragment() {
 
     private lateinit var searchView: SearchView
     private lateinit var recyclerView: RecyclerView
-    private val adapter = StarWarsAdapter()
-    private val viewModel: SearchViewModel by viewModels()
+    private val adapter = StarWarsAdapter { starWarsModel ->
+        doStarWarsEntityFavourite(starWarsModel)
+    }
+
+    private val viewModel: SearchViewModel by viewModels { vmFactory }
 
     @Inject
     lateinit var vmFactory: SearchViewModel.SearchVMFactory
 
     override fun onAttach(context: Context) {
+        (context.applicationContext as MainApp).appComponent.inject(this)
         super.onAttach(context)
-        (requireContext() as MainApp).appComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -41,7 +45,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
-        recyclerView = view.findViewById(R.id.rvMedications)
+        recyclerView = view.findViewById(R.id.rvSearch)
         searchView = view.findViewById(R.id.searchView)
         searchView.clearFocus()
         searchView.setOnQueryTextListener(createSearchListener())
@@ -84,4 +88,7 @@ class SearchFragment : Fragment() {
             return true
         }
     }
+
+    private fun doStarWarsEntityFavourite(starWarsModel: UIModel) =
+        viewModel.onLikeClicked(starWarsModel)
 }
