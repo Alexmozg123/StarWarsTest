@@ -26,6 +26,12 @@ class SearchViewModel(
         }
     }
 
+    fun onLikeClicked(model: UIModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            starWarsInteractor.doFavourite(model)
+        }
+    }
+
     @Suppress("UNCHECKED_CAST")
     class SearchVMFactory @Inject constructor(
         private val starWarsInteractor: StarWarsInteractor,

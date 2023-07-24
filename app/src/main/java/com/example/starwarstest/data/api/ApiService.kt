@@ -7,12 +7,12 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("people/?search={name}")
+    @GET("people/")
     suspend fun getPeopleResponseByName(
         @Query("search") peopleName: String
     ): PeopleResponse
 
-    @GET("starship/?search={name}")
+    @GET("starships/")
     suspend fun getStarshipResponseByName(
         @Query("search") starshipName: String
     ): StarshipResponse
