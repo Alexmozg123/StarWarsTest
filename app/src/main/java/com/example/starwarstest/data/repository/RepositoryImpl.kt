@@ -21,6 +21,7 @@ class RepositoryImpl @Inject constructor(
         apiService.getPeopleResponseByName(name).results
             .map { peopleBin ->
                 People(
+                    peopleBin.url.split('/')[5].toInt(),
                     peopleBin.name,
                     peopleBin.gender,
                     peopleBin.starships.size
@@ -31,10 +32,11 @@ class RepositoryImpl @Inject constructor(
         apiService.getStarshipResponseByName(name).results
             .map { starshipBin ->
                 Starship(
+                    starshipBin.url.split('/')[5].toInt(),
                     starshipBin.name,
                     starshipBin.model,
                     starshipBin.manufacturer,
-                    starshipBin.passengers.toInt()
+                    starshipBin.passengers.length
                 )
             }
 

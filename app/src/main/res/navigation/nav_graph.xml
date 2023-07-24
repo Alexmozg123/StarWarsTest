@@ -8,13 +8,13 @@
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.example.starwarstest.ui.screens.favourites.FavouriteFragment"
-        android:label="fragment_favourites_list"
+        android:label="@string/favourite"
         tools:layout="@layout/fragment_favourites_list" />
 
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.starwarstest.ui.screens.searchscreens.SearchFragment"
-        android:label="fragment_search_starship"
+        android:label="@string/star_wars_app"
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_favouriteFragment"

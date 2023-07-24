@@ -33,7 +33,7 @@ class FavouriteViewModel(
     private fun updateFavouriteList() {
         viewModelScope.launch(Dispatchers.IO) {
             val list = starWarsInteractor.readFavourite()
-            if (list.isNotEmpty()) _result.postValue(list)
+            _result.postValue(list)
         }
     }
 

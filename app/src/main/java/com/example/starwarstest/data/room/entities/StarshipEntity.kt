@@ -6,7 +6,7 @@ import com.example.starwarstest.domain.model.Starship
 
 @Entity(tableName = "starship_entity")
 data class StarshipEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = false) val id: Int,
     val name: String,
     val model: String,
     val manufacturer: String,
@@ -14,6 +14,7 @@ data class StarshipEntity(
 ) {
 
     fun convertToStarship() : Starship = Starship(
+        id = id,
         name = name,
         model = model,
         manufacturer = manufacturer,
@@ -22,7 +23,7 @@ data class StarshipEntity(
 
     companion object {
         fun convertFromStarship(starship: Starship) : StarshipEntity = StarshipEntity(
-            id = 0,
+            id = starship.id,
             name = starship.name,
             model = starship.model,
             manufacturer = starship.manufacturer,

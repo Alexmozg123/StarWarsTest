@@ -76,11 +76,11 @@ class StarWarsAdapter(
         override fun areItemsTheSame(oldItem: UIModel, newItem: UIModel): Boolean {
             val isSameRepoItem = oldItem is UIModel.StarshipModel
                     && newItem is UIModel.StarshipModel
-                    && oldItem.starship.name == newItem.starship.name
+                    && oldItem.starship.id == newItem.starship.id
 
             val isSameSeparatorItem = oldItem is UIModel.PeopleModel
                     && newItem is UIModel.PeopleModel
-                    && oldItem.people.name == newItem.people.name
+                    && oldItem.people.id == newItem.people.id
 
             return isSameRepoItem || isSameSeparatorItem
         }
