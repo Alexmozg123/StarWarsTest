@@ -50,17 +50,6 @@ class SearchFragment : Fragment() {
         searchView.clearFocus()
         searchView.setOnQueryTextListener(createSearchListener())
 
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recyclerView.adapter = adapter
-
-        viewModel.result.observe(viewLifecycleOwner) { resultList ->
-            adapter.submitList(resultList)
-        }
-
         (requireActivity() as MenuHost).addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) =
                 menuInflater.inflate(R.menu.toolbar_menu, menu)
@@ -73,9 +62,21 @@ class SearchFragment : Fragment() {
                 return false
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        return view
     }
 
-    fun navigateToFormFragment(view: View) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().actionBar?.title = "Star Wars App"
+        recyclerView.adapter = adapter
+
+        viewModel.result.observe(viewLifecycleOwner) { resultList ->
+            adapter.submitList(resultList)
+        }
+    }
+
+    private fun navigateToFormFragment(view: View) {
         Navigation.findNavController(view)
             .navigate(R.id.action_searchFragment_to_favouriteFragment)
     }

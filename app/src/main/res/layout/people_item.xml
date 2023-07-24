@@ -15,13 +15,35 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/tvPeople"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:text="@string/people"
+            android:textStyle="bold"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/ivFavourite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNameInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPeople" />
+
+        <TextView
             android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             app:layout_constraintEnd_toStartOf="@+id/ivFavourite"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/tvNameInfo"
+            app:layout_constraintTop_toBottomOf="@id/tvPeople" />
 
         <ImageView
             android:id="@+id/ivFavourite"
@@ -30,27 +52,45 @@
             android:layout_margin="8dp"
             android:layout_marginBottom="15dp"
             android:src="@drawable/baseline_favorite_border"
-            app:layout_constraintBottom_toTopOf="@+id/tvMannedStarShip"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvGenderInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/gender"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
         <TextView
             android:id="@+id/tvGender"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/ivFavourite"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvGenderInfo"
             app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
         <TextView
+            android:id="@+id/tvMannedStarShipInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/manned_starship"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvGender" />
+
+        <TextView
             android:id="@+id/tvMannedStarShip"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvMannedStarShipInfo"
             app:layout_constraintTop_toBottomOf="@+id/tvGender" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

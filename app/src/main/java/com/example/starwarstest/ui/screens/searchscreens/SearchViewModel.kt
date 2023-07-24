@@ -22,7 +22,7 @@ class SearchViewModel(
     fun onTextChanged(name: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val list = starWarsInteractor.searchPeopleAndStarshipsByName(name)
-            if (list.isNotEmpty()) _result.postValue(list)
+            _result.postValue(list)
         }
     }
 
