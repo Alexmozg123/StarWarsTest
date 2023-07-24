@@ -68,7 +68,6 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().actionBar?.title = "Star Wars App"
         recyclerView.adapter = adapter
 
         viewModel.result.observe(viewLifecycleOwner) { resultList ->
