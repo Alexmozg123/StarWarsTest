@@ -6,16 +6,17 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.starwarstest.data.room.entities.StarshipEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StarshipDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertStarship(starshipEntity: StarshipEntity)
-
     @Query("SELECT * FROM starship_entity")
-    fun getStarshipList(): List<StarshipEntity>
+    fun getStarshipList(): Flow<List<StarshipEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertStarship(starshipEntity: StarshipEntity)
 
     @Delete
-    fun deleteStarship(starshipEntity: StarshipEntity)
+    suspend fun deleteStarship(starshipEntity: StarshipEntity)
 }

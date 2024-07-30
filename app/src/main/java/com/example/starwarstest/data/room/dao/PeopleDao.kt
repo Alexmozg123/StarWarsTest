@@ -6,16 +6,17 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.starwarstest.data.room.entities.PeopleEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PeopleDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPeople(peopleEntity: PeopleEntity)
-
     @Query("SELECT * FROM people_entity")
-    fun getPeopleList(): List<PeopleEntity>
+    fun getPeopleList(): Flow<List<PeopleEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPeople(peopleEntity: PeopleEntity)
 
     @Delete
-    fun deletePeople(peopleEntity: PeopleEntity)
+    suspend fun deletePeople(peopleEntity: PeopleEntity)
 }

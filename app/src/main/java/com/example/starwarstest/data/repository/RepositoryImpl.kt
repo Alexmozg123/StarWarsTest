@@ -9,6 +9,8 @@ import com.example.starwarstest.domain.model.People
 import com.example.starwarstest.domain.model.Starship
 import com.example.starwarstest.domain.repositories.RetrofitRepository
 import com.example.starwarstest.domain.repositories.RoomRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
@@ -40,29 +42,36 @@ class RepositoryImpl @Inject constructor(
                 )
             }
 
-    override fun doPeopleFavourite(people: People) {
+    override suspend fun doPeopleFavourite(people: People) {
         val peopleEntity = PeopleEntity.convertFromPeople(people)
         peopleDao.insertPeople(peopleEntity)
     }
 
-    override fun doStarshipFavourite(starship: Starship) {
+    override suspend fun doStarshipFavourite(starship: Starship) {
         val starshipEntity = StarshipEntity.convertFromStarship(starship)
         starshipDao.insertStarship(starshipEntity)
     }
 
-    override fun doPeopleNotFavourite(people: People) {
+    override suspend fun doPeopleNotFavourite(people: People) {
         val peopleEntity = PeopleEntity.convertFromPeople(people)
         peopleDao.deletePeople(peopleEntity)
     }
 
-    override fun doStarshipNotFavourite(starship: Starship) {
+    override suspend fun doStarshipNotFavourite(starship: Starship) {
         val starshipEntity = StarshipEntity.convertFromStarship(starship)
         starshipDao.deleteStarship(starshipEntity)
     }
 
-    override fun getStarshipList(): List<Starship> =
-        starshipDao.getStarshipList().map { starshipEntity -> starshipEntity.convertToStarship() }
+    override fun getStarshipList(): Flow<List<Starship>> {
+        return starshipDao.getStarshipList().map { starshipEntityList ->
+            starshipEntityList.map { it.convertToStarship() }
+        }
+    }
 
-    override fun getPeopleList(): List<People> =
-        peopleDao.getPeopleList().map { peopleEntity -> peopleEntity.convertToPeople() }
+
+    override fun getPeopleList(): Flow<List<People>> {
+        return peopleDao.getPeopleList().map { peopleEntityList ->
+            peopleEntityList.map { it.convertToPeople() }
+        }
+    }
 }

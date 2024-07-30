@@ -2,18 +2,19 @@ package com.example.starwarstest.domain.repositories
 
 import com.example.starwarstest.domain.model.People
 import com.example.starwarstest.domain.model.Starship
+import kotlinx.coroutines.flow.Flow
 
 interface RoomRepository {
 
-    fun doPeopleFavourite(people: People)
+    suspend fun doPeopleFavourite(people: People)
 
-    fun doStarshipFavourite(starship: Starship)
+    suspend fun doStarshipFavourite(starship: Starship)
 
-    fun doPeopleNotFavourite(people: People)
+    suspend fun doPeopleNotFavourite(people: People)
 
-    fun doStarshipNotFavourite(starship: Starship)
+    suspend fun doStarshipNotFavourite(starship: Starship)
 
-    fun getStarshipList(): List<Starship>
+    fun getStarshipList(): Flow<List<Starship>>
 
-    fun getPeopleList(): List<People>
+    fun getPeopleList(): Flow<List<People>>
 }
