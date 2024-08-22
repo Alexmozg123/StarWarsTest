@@ -20,3 +20,4 @@ Project is created with:
 * Moshi
 * Room
 * Coroutines Kotlin
+* Coroutines Flow
